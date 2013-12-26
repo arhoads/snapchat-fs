@@ -5,6 +5,7 @@ Usage:
   sfs list
   sfs download all <target_directory>
   sfs upload <file> ...
+  sfs send <user> <file> ...
   sfs (-h | --help)
   sfs (-v | --version)
 
@@ -132,6 +133,10 @@ def cli(arguments):
     if arguments['upload']:
         for filename in arguments['<file>']:
             upload_sfs_file(SETTINGS[USERNAME], SETTINGS[PASSWORD], filename)
+    if arguments['send']:
+        user = arguments['<user>']
+        for filename in arguments['<file>']:
+            send_sfs_file(SETTINGS[USERNAME], SETTINGS[PASSWORD], filename, user)
 
 def main():
     global SETTINGS

@@ -148,3 +148,23 @@ def upload_sfs_file(username, password, filename):
     sfs_id = ss.generate_sfs_id(basename, data)
     ss.upload_image(data, sfs_id)
     ss.send_image_to(username, sfs_id)
+
+def send_sfs_file(username, password, filename, toUsername):
+    """
+    Sends a file to a Snapchat user.
+
+    @username User who will own the file in Snapchat FS.
+    @password Password of user.
+    @filename Path of the file to upload.
+    @toUsername User who we are sending the file to
+    """
+    with open(filename) as f:
+        data = f.read()
+
+    basename = os.path.basename(filename)
+    print util.green('Uploading file ') + (basename)
+    ss = SfsSession(username, password)
+    ss.login()
+    sfs_id = ss.generate_sfs_id(basename, data)
+    ss.upload_image(data, sfs_id)
+    ss.send_image_to(toUsername, sfs_id)
